@@ -1,0 +1,51 @@
+const express = require('express');
+const router = express.Router();
+const model = require('../models/productos');
+
+const get = (req, res) => {
+    model.getAll()
+    .then((response) => res.status(200).json(response))
+    .catch((err) => res.status(500).json(err))
+    console.log(req.body)
+};// ver los productos que tengo
+
+const create = (req, res) => {
+    model.create(req.body)
+    .then((response) => res.status(200).json(response))
+    .catch((err) => res.status(500).json(err))
+    console.log(req.body)
+};
+
+const single = (req, res) => {
+    model.single(req.params.id)
+    .then((response) => res.status(200).json(response))
+    .catch((err) => res.status(500).json(err))
+    console.log(req.params.id)
+};
+
+const update = (req, res) => {
+    model.update(req.params.id, req.body)
+    .then((response) => res.status(200).json(response))
+    .catch((err) => res.status(500).json(err))
+    console.log(req.params.id)
+};
+
+const del = (req, res) => {
+    model.update(req.params.id, {eliminado : true})
+    .then((response) => res.status(200).json(response))
+    .catch((err) => res.status(500).json(err))
+    console.log(req.params.id)
+};
+
+
+
+
+router.get('/', get);
+router.get('/single/:id', single);
+router.post('/create', create);
+router.post('/update/:id', update); 
+router.post('/delete/:id', del);
+
+
+
+module.exports = router;
