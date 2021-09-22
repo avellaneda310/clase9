@@ -6,14 +6,12 @@ const get = (req, res) => {
     model.getAll()
     .then((response) => res.status(200).json(response))
     .catch((err) => res.status(500).json(err))
-    console.log(req.body)
 };// ver los productos que tengo
 
 const create = (req, res) => {
     model.create(req.body)
     .then((response) => res.status(200).json(response))
     .catch((err) => res.status(500).json(err))
-    console.log(req.body)
 };
 
 const single = (req, res) => {
